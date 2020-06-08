@@ -1,0 +1,31 @@
+version: '3.5'
+
+networks:
+  nanopam-net:
+    external: true
+
+services:
+  backup:
+    container_name: scheduler
+    build: .
+    restart: unless-stopped
+    networks:
+      - nanopam-net
+    env_file:
+      - .env
+    volumes:
+      - ./data:/data
+      - ./cache:/cache
+      - ./secrets:/secrets
+    ports:
+      - 127.0.0.1:${PORT}:80
+  remote:
+    container_name: remote
+    build: ./backup
+    restart: unless-stopped
+    networks:
+      - nanopam-net
+    expose:
+      - 22
+    ports:
+      - '49154:22'

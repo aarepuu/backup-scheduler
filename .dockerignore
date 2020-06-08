@@ -1,0 +1,10 @@
+#
+# Ignore files from the docker command
+#
+
+.git
+node_modules
+coverage
+npm-debug.log
+.DS_Store
+*.env

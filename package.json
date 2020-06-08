@@ -1,0 +1,66 @@
+{
+  "name": "backup-scheduler",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Schedule regular database backups",
+  "main": "dist/scheduler.js",
+  "types": "dist/scheduler.d.ts",
+  "repository": "aarepuu/backup-scheduler",
+  "author": "Aare Puussaar",
+  "license": "MIT",
+  "scripts": {
+    "build-ts": "tsc",
+    "build": "npm run lint && npm run build-ts",
+    "lint": "npx tsc --noEmit",
+    "coverage": "jest --coverage",
+    "preversion": "npm test -s && npm run build && git add dist",
+    "prettier": "prettier --write '**/*.{js,ts,tsx,json,css,md}'",
+    "start": "node -r dotenv/config dist/scheduler.js",
+    "test": "jest",
+    "dev": "NODE_ENV=development nodemon"
+  },
+  "keywords": [],
+  "engines": {
+    "node": "12.x.x",
+    "npm": "6.x.x"
+  },
+  "dependencies": {
+    "dotenv": "^8.1.0",
+    "node-cron": "^2.0.3"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.18",
+    "@types/node": "^12.7.2",
+    "jest": "^26.0.0",
+    "lint-staged": "^9.2.3",
+    "nodemon": "^1.19.1",
+    "prettier": "^1.18.2",
+    "ts-jest": "^26.0.0",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.9.3",
+    "yorkie": "^2.0.0"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,json,css,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/dist/"
+    ]
+  }
+}
