@@ -64,7 +64,7 @@ const schema = async (
       config.port
     }" -U"${config.user}" "${
       config.name
-    }" --schema --format="plain" | gzip > "${config.data_dir}/${
+    }" --schema-only --format="plain" | gzip > "${config.data_dir}/${
       config.name
     }_schema_${new Date().toISOString()}.sql.gz"`
     if (process.env.IS_DUMMY) {

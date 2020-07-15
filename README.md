@@ -20,6 +20,7 @@ docker run -it --rm \
   -e DB_NAME="mydb" \
   -e DIFF_SCHEDULE="* * * * *" \
   -v "/my_massive_drive:/data" \
+  -v "/my_cache_directory:/cache" \
   --link database \
   -p 8080:80 \
   aarepuu/backup-scheduler
@@ -38,6 +39,7 @@ backup:
     - secrets.env
   volumes:
     - ./my_massive_drive:/data
+    - ./my_cache_directory:/cache
   ports:
     - 8080:80
 ```
@@ -76,6 +78,8 @@ backup:
     IS_REMOTE: true
   env_file:
     - secrets.env
+  volumes:
+    - ./my_cache_directory:/cache
   ports:
     - 8080:80
 ```
@@ -86,6 +90,12 @@ backup:
 
 ```bash
 awk -v ORS='\\n' '1' private_key | pbcopy
+```
+
+**_To use named volumes for diff cache_**
+
+```bash
+docker volume create my_cache_volume
 ```
 
 ## Variables

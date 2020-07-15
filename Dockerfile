@@ -5,7 +5,6 @@ RUN apk add --update openssh-client rsync postgresql-client gzip \
 RUN mkdir /cache
 RUN mkdir /secrets
 RUN mkdir /data
-VOLUME [ "/cache"]
 WORKDIR /app
 COPY ["package*.json", "tsconfig.json", "/app/"]
 

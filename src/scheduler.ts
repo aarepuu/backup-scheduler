@@ -111,17 +111,23 @@ switch (TYPE) {
       )
       tasks.push(full)
     }
+    // add optional schema backup schedule
     if (config.schema) {
       validateScheduleOrExit(config.schema, 'SCHEMA_SCHEDULE')
       let schemaSchedule: Schedule = {
         type: 'SCHEMA',
         schedule: config.schema
       }
+      schedules.push(schemaSchedule)
       const schema = cron.schedule(
         config.schema,
         async () => {
+          console.log(`SCHEMA backup started at ${new Date().toISOString()}`)
           await connector.schema(config, remote)
           schemaSchedule.last = new Date()
+          console.log(
+            `SCHEMA backup completed at ${schemaSchedule.last.toISOString()}`
+          )
         },
         { scheduled: false }
       )

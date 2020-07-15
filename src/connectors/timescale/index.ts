@@ -92,6 +92,24 @@ const dumpTableToSQL = async (
   return execShellCommand(cmd)
 }
 
+const getNormalTables = async (config: DBConfig): Promise<string[]> => {
+  // normal tables backup
+  const normalTables = await execShellCommand(sqlCommand(config, tableQuery))
+  // clean tablelist
+  return normalTables.split('\n').filter(table => table)
+}
+
+const getHyperTables = async (config: DBConfig): Promise<string[]> => {
+  // normal tables backup
+  const hyperTables = await execShellCommand(sqlCommand(config, hyperQuery))
+  // clean tablelist
+  return hyperTables.split('\n').filter(table => table)
+}
+
+// TODO: needs testing for hypertables
+// see - https://docs.timescale.com/latest/using-timescaledb/backup
+// pg_dump -s -d old_db --table conditions -N _timescaledb_internal | \
+//   grep -v _timescaledb_internal > schema.sql
 const schema = async (
   config: DBConfig,
   remote: RemoteConfig
@@ -101,9 +119,9 @@ const schema = async (
       config.port
     }" -U"${config.user}" "${
       config.name
-    }" --schema --format="plain" | gzip > "${config.data_dir}/${
-      config.name
-    }_schema_${new Date().toISOString()}.sql.gz"`
+    }" --schema-only --format="plain" -N _timescaledb_internal | grep -v _timescaledb_internal | gzip > "${
+      config.data_dir
+    }/${config.name}_schema_${new Date().toISOString()}.sql.gz"`
     if (process.env.IS_DUMMY) {
       console.log(cmd)
       return cmd
@@ -122,12 +140,8 @@ const diff = async (config: DBConfig, remote: RemoteConfig): Promise<void> => {
     // get transactionId database
     const transactionFiles = await fetchTransactionFiles(config.cache_dir)
 
-    // normal tables backup
-    const getNormalTables = await execShellCommand(
-      sqlCommand(config, tableQuery)
-    )
     // clean tablelist
-    const normalTables = getNormalTables.split('\n').filter(table => table)
+    const normalTables = await getNormalTables(config)
 
     // look for new and updated tables
     const toBackupNormal = await backupTables(
@@ -155,12 +169,9 @@ const diff = async (config: DBConfig, remote: RemoteConfig): Promise<void> => {
       // )
     }
 
-    // hyper tables backup
-    const getHyperTables = await execShellCommand(
-      sqlCommand(config, hyperQuery)
-    )
-    // clean hypertablelist
-    const hyperTables = getHyperTables.split('\n').filter(table => table)
+    // get hypertablelist
+    const hyperTables = await getHyperTables(config)
+
     // run backups
     for (const hypertable of hyperTables) {
       let getHyperShards = await execShellCommand(
