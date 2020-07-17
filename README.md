@@ -44,7 +44,7 @@ backup:
     - 8080:80
 ```
 
-> Where `secrets.env` has DB_HOST, DB_PORT, DB_USER, DB_PASS & DB_NAME in it
+> Where `secrets.env` has DB_HOST, DB_USER, DB_PASS & DB_NAME in it
 
 ## Sample usage for remote backups
 
@@ -100,22 +100,22 @@ docker volume create my_cache_volume
 
 ## Variables
 
-| Name            | Usage                                    | Values                                  |
-| --------------- | ---------------------------------------- | --------------------------------------- |
-| TYPE            | The type of your `database`              | `postgres` or `timescale`               |
-| DB_HOST         | The hostname of your `database`          | defaults to `5432`                      |
+| Name            | Usage                                    |                 Values                  |
+| :-------------- | ---------------------------------------- | :-------------------------------------: |
+| TYPE            | The type of your `database`              |        `postgres` or `timescale`        |
+| DB_HOST         | The hostname of your `database`          |           defaults to `5432`            |
 | DB_PORT         | The port number of your `database`       |                                         |
 | DB_USER         | The username of your `database`          |                                         |
 | DB_PASS         | The password of your `database`          |                                         |
 | DB_NAME         | The name of your `database`              |                                         |
 | DIFF_SCHEDULE   | The schedule to run the diff backup on   | [\* \* \* \* \*](https://crontab.guru/) |
-| SCHEMA_SCHEDULE | The schedule to run the schema backup on | (optional)                              |
-| FULL_SCHEDULE   | The schedule to run the dull backup on   | (optional)                              |
-| IS_REMOTE       | To copy files to `remote` location       | (optional)                              |
-| REMOTE_HOST     | The hostname of your `remote` location   | (optional)                              |
-| REMOTE_USER     | The username of your `remote` location   | (optional)                              |
-| REMOTE_PATH     | The copy path on your `remote` location  | (optional)                              |
-| REMOTE_KEY      | Private key string for `remote` location | (optional)                              |
+| SCHEMA_SCHEDULE | The schedule to run the schema backup on |               (optional)                |
+| FULL_SCHEDULE   | The schedule to run the dull backup on   |               (optional)                |
+| IS_REMOTE       | To copy files to `remote` location       |               (optional)                |
+| REMOTE_HOST     | The hostname of your `remote` location   |               (optional)                |
+| REMOTE_USER     | The username of your `remote` location   |               (optional)                |
+| REMOTE_PATH     | The copy path on your `remote` location  |               (optional)                |
+| REMOTE_KEY      | Private key string for `remote` location |               (optional)                |
 
 ## Dev Commands
 
