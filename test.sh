@@ -5,6 +5,7 @@ DB_CONTAINER=postgres
 docker build -t $IMAGE_NAME .
 
 docker run -it --rm \
+  -e TYPE="timescale" \
   -e DB_HOST=$DB_CONTAINER \
   -e DB_USER="postgres" \
   -e DB_PASS="secret" \
