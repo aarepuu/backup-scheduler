@@ -44,11 +44,11 @@ export function getDatabaseConfig(): DBConfig {
   // TODO: find a better way of reading all the variables
   return {
     host: String(process.env.DB_HOST),
-    port: String(process.env.DB_PORT) || '5432',
     user: String(process.env.DB_USER),
     pass: String(process.env.DB_PASS),
     name: String(process.env.DB_NAME),
     diff: String(process.env.DIFF_SCHEDULE),
+    port: process.env.DB_PORT || '5432',
     cache_dir: process.env.CACHE_DIR || '/cache',
     data_dir: process.env.DATA_DIR || '/data',
     full: process.env.FULL_SCHEDULE,
