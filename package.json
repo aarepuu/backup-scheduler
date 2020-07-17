@@ -1,7 +1,7 @@
 {
   "name": "backup-scheduler",
   "private": true,
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Schedule regular database backups",
   "main": "dist/scheduler.js",
   "types": "dist/scheduler.d.ts",
