@@ -117,6 +117,8 @@ docker volume create my_cache_volume
 | REMOTE_PATH     | The copy path on your `remote` location  |               (optional)                |
 | REMOTE_KEY      | Private key string for `remote` location |               (optional)                |
 
+> **NOTE:** time in docker containers is `UTC` which might be different from your local time
+
 ## Dev Commands
 
 ```bash
