@@ -44,7 +44,7 @@ backup:
     - 8080:80
 ```
 
-> Where `secrets.env` has DB_HOST, DB_USER, DB_PASS & DB_NAME in it
+> Where `secrets.env` has DB_HOST, DB_PORT, DB_USER, DB_PASS & DB_NAME in it
 
 ## Sample usage for remote backups
 
@@ -103,7 +103,8 @@ docker volume create my_cache_volume
 | Name            | Usage                                    | Values                                  |
 | --------------- | ---------------------------------------- | --------------------------------------- |
 | TYPE            | The type of your `database`              | `postgres` or `timescale`               |
-| DB_HOST         | The hostname of your `database`          |                                         |
+| DB_HOST         | The hostname of your `database`          | defaults to `5432`                      |
+| DB_PORT         | The port number of your `database`       |                                         |
 | DB_USER         | The username of your `database`          |                                         |
 | DB_PASS         | The password of your `database`          |                                         |
 | DB_NAME         | The name of your `database`              |                                         |

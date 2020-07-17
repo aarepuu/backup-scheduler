@@ -36,7 +36,6 @@ export function getDatabaseConfig(): DBConfig {
   // check for required values or exit
   enforceValuesOrExit([
     'DB_HOST',
-    'DB_PORT',
     'DB_USER',
     'DB_PASS',
     'DB_NAME',
@@ -45,7 +44,7 @@ export function getDatabaseConfig(): DBConfig {
   // TODO: find a better way of reading all the variables
   return {
     host: String(process.env.DB_HOST),
-    port: String(process.env.DB_PORT),
+    port: String(process.env.DB_PORT) || '5432',
     user: String(process.env.DB_USER),
     pass: String(process.env.DB_PASS),
     name: String(process.env.DB_NAME),
