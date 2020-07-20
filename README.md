@@ -103,8 +103,8 @@ docker volume create my_cache_volume
 | Name            | Usage                                    |                 Values                  |
 | :-------------- | ---------------------------------------- | :-------------------------------------: |
 | TYPE            | The type of your `database`              |        `postgres` or `timescale`        |
-| DB_HOST         | The hostname of your `database`          |           defaults to `5432`            |
-| DB_PORT         | The port number of your `database`       |                                         |
+| DB_HOST         | The hostname of your `database`          |                                         |
+| DB_PORT         | The port number of your `database`       |           defaults to `5432`            |
 | DB_USER         | The username of your `database`          |                                         |
 | DB_PASS         | The password of your `database`          |                                         |
 | DB_NAME         | The name of your `database`              |                                         |
