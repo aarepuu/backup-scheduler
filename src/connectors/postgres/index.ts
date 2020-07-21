@@ -27,7 +27,10 @@ const backupTables = async (
     const filename = table.replace(/[^A-Z0-9_.]/gi, '')
     let modified = true
     if (transaction_files.includes(filename)) {
-      modified = await isModified(filename, transaction_id.trim())
+      modified = await isModified(
+        `${config.cache_dir}/${filename}`,
+        transaction_id.trim()
+      )
     }
     if (transaction_id && modified) {
       toBackup.push({ table, filename, transaction_id: transaction_id.trim() })

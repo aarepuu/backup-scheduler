@@ -66,10 +66,8 @@ let schedules: Object[] = []
 
 // switch for backup type
 switch (TYPE) {
-  case 'postgres':
-    console.log(`Backup ${TYPE}`)
-    break
   case 'timescale':
+  case 'postgres':
     console.log(`Backup ${TYPE}`)
     // get database config
     const config = Configs.getDatabaseConfig()
