@@ -19,6 +19,9 @@ export type DBShard = {
   transaction_id: string
 }
 
+// for getting normal tables
+export const simpleTableQuery = `SELECT  "table_schema" || '.' || "table_name" FROM information_schema.tables WHERE table_schema NOT IN ('pg_catalog', 'information_schema') AND table_type != 'VIEW';`
+
 // for getting table names
 export const tableQuery = `SELECT  "table_schema" || '.' || "table_name" FROM information_schema.tables WHERE table_schema NOT LIKE '_timescaledb_%' AND table_schema NOT LIKE 'timescaledb_information%' AND table_schema NOT IN ('pg_catalog', 'information_schema') AND table_type != 'VIEW' AND table_name NOT IN ( SELECT table_name FROM "_timescaledb_catalog"."hypertable" );`
 

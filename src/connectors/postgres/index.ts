@@ -3,7 +3,7 @@ import { DBConnector } from '../interfaces'
 import { execShellCommand } from '../../utils'
 import { copyToRemote } from '../../helpers/remote'
 import {
-  tableQuery,
+  simpleTableQuery,
   sqlCommand,
   getTransactionId,
   DBTable
@@ -90,7 +90,7 @@ const diff = async (config: DBConfig, remote: RemoteConfig): Promise<void> => {
 
     // normal tables backup
     const getNormalTables = await execShellCommand(
-      sqlCommand(config, tableQuery)
+      sqlCommand(config, simpleTableQuery)
     )
     // clean tablelist
     const normalTables = getNormalTables.split('\n').filter(table => table)
