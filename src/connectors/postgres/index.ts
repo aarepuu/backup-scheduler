@@ -112,14 +112,14 @@ const diff = async (config: DBConfig, remote: RemoteConfig): Promise<void> => {
           remote
         )
         console.log(`File transfer successful for ${table.filename}.sql.gz`)
+        //remove file
+        execShellCommand(`rm "${config.data_dir}/${table.filename}.sql.gz"`)
       }
       // transactionIdPromises.push(
       await setTransactionId(
         `${config.cache_dir}/${table.filename}`,
         table.transaction_id
       )
-      //remove file
-      execShellCommand(`rm "${config.data_dir}/${table.filename}.sql.gz"`)
       // )
     }
     // await Promise.all(transactionIdPromises)
